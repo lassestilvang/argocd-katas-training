@@ -3,3 +3,19 @@ service:
 persistence:
   enabled: false
 jenkinsPassword: student
+project: default
+destination:
+  namespace: student-2
+  name: in-cluster
+syncPolicy:
+  automated: {}
+sources:
+  - repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: 12.4.0
+    helm:
+      valueFiles:
+        - $values/jenkins/values.yaml
+    chart: jenkins
+  - repoURL: 'https://github.com/lassestilvang/argocd-katas-training'
+    targetRevision: main
+    ref: values
