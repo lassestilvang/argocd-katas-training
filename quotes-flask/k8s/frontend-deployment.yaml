@@ -17,7 +17,7 @@ spec:
       labels:
         app: frontend
     spec:
-      containers:
+      containersX:
         - image: ghcr.io/eficode-academy/quotes-flask-frontend:release
           name: quotes-flask-frontend
           ports:
