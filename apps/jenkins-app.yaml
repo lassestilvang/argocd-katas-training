@@ -1,16 +1,26 @@
-project: default
-destination:
-  server: https://kubernetes.default.svc
-  namespace: student-2
-syncPolicy:
-  automated: {}
-sources:
-  - repoURL: https://charts.bitnami.com/bitnami
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: lasse-jenkins
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+  - repoURL: 'https://charts.bitnami.com/bitnami'
     targetRevision: 12.4.0
     helm:
       valueFiles:
         - $values/jenkins/values.yaml
     chart: jenkins
-  - repoURL: https://github.com/lassestilvang/argocd-katas-training
+  - repoURL: 'https://github.com/lassestilvang/argocd-katas-training'
     targetRevision: main
     ref: values
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: student-2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
