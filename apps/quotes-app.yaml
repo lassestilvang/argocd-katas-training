@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: quotes-student-<YOURNUMBER>
+  name: quotes-student-2
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: https://kubernetes.default.svc
-    namespace: student-<YOUR number>
+    namespace: student-2
   project: default
   source:
-    repoURL: https://github.com/eficode-academy/argocd-katas.git  # Update this URL if the helm chart is in a different repo
+    repoURL: https://github.com/lassestilvang/argocd-katas-training.git  # Update this URL if the helm chart is in a different repo
     targetRevision: HEAD
     path: quotes-flask/helm/quotes-flask
     helm:
